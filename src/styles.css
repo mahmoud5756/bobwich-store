@@ -1,0 +1,295 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+/*
+ * Design system definition.
+ *
+ * The @theme inline block maps CSS custom properties to Tailwind utility
+ * classes (e.g. --color-primary -> bg-primary, text-primary).
+ *
+ * The :root and .dark blocks define the actual color values using oklch.
+ * All colors MUST use oklch format.
+ *
+ * To add a new semantic color:
+ * 1. Add the variable to :root (light value) and .dark (dark value)
+ * 2. Register it in @theme inline as --color-<name>: var(--<name>)
+ */
+
+@theme inline {
+  --font-display: "Cairo", sans-serif;
+  --font-body: "IBM Plex Sans Arabic", sans-serif;
+  --font-sans: "IBM Plex Sans Arabic", sans-serif;
+  --color-brand: var(--brand);
+  --color-brand-2: var(--brand-2);
+  --color-accent-pink: var(--accent-pink);
+  --color-mint: var(--mint);
+  --color-mint-strong: var(--mint-strong);
+  --color-sky: var(--sky);
+  --color-sky-strong: var(--sky-strong);
+  --color-amber: var(--amber);
+  --color-amber-strong: var(--amber-strong);
+  --color-coral: var(--coral);
+  --color-coral-strong: var(--coral-strong);
+  --color-pink: var(--pink);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --radius-2xl: calc(var(--radius) + 8px);
+  --radius-3xl: calc(var(--radius) + 12px);
+  --radius-4xl: calc(var(--radius) + 16px);
+
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-ring-offset-background: var(--background);
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+}
+
+:root {
+  --radius: 0.9rem;
+  --background: oklch(0.98 0.012 330);
+  --foreground: oklch(0.38 0.03 265);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.35 0.03 265);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.35 0.03 265);
+  --primary: oklch(0.58 0.19 285);
+  --primary-foreground: oklch(0.99 0.005 285);
+  --secondary: oklch(0.96 0.012 300);
+  --secondary-foreground: oklch(0.4 0.04 285);
+  --muted: oklch(0.96 0.008 300);
+  --muted-foreground: oklch(0.62 0.02 275);
+  --accent: oklch(0.95 0.03 330);
+  --accent-foreground: oklch(0.42 0.09 340);
+  --destructive: oklch(0.62 0.2 20);
+  --destructive-foreground: oklch(0.99 0.005 20);
+  --border: oklch(0.93 0.012 300);
+  --input: oklch(0.93 0.012 300);
+  --ring: oklch(0.7 0.12 285);
+
+  /* brand palette from the chosen direction */
+  --brand: oklch(0.6 0.19 285);
+  --brand-2: oklch(0.62 0.18 305);
+  --accent-pink: oklch(0.6 0.22 25);
+  --mint: oklch(0.79 0.14 165);
+  --mint-strong: oklch(0.6 0.13 165);
+  --sky: oklch(0.78 0.12 230);
+  --sky-strong: oklch(0.58 0.13 235);
+  --amber: oklch(0.85 0.15 85);
+  --amber-strong: oklch(0.65 0.14 70);
+  --coral: oklch(0.73 0.16 20);
+  --coral-strong: oklch(0.58 0.19 22);
+  --pink: oklch(0.72 0.19 25);
+
+  --gradient-brand: linear-gradient(135deg, oklch(0.6 0.19 285), oklch(0.62 0.18 310));
+  --gradient-hot: linear-gradient(135deg, oklch(0.6 0.19 285), oklch(0.6 0.22 25));
+  --gradient-warm: linear-gradient(135deg, oklch(0.78 0.16 75), oklch(0.72 0.18 45));
+  --page-bg:
+    radial-gradient(circle at 12% 8%, oklch(0.92 0.05 275) 0%, transparent 42%),
+    radial-gradient(circle at 88% 10%, oklch(0.93 0.05 25) 0%, transparent 42%),
+    radial-gradient(circle at 75% 95%, oklch(0.93 0.06 165) 0%, transparent 45%);
+
+  --chart-1: oklch(0.6 0.19 285);
+  --chart-2: oklch(0.78 0.12 230);
+  --chart-3: oklch(0.79 0.14 165);
+  --chart-4: oklch(0.85 0.15 85);
+  --chart-5: oklch(0.73 0.16 20);
+  --sidebar: oklch(0.99 0.008 330);
+  --sidebar-foreground: oklch(0.38 0.03 265);
+  --sidebar-primary: oklch(0.6 0.19 285);
+  --sidebar-primary-foreground: oklch(0.99 0.005 285);
+  --sidebar-accent: oklch(0.96 0.012 300);
+  --sidebar-accent-foreground: oklch(0.4 0.04 285);
+  --sidebar-border: oklch(0.93 0.012 300);
+  --sidebar-ring: oklch(0.7 0.12 285);
+}
+
+
+.dark {
+  --background: oklch(0.129 0.042 264.695);
+  --foreground: oklch(0.984 0.003 247.858);
+  --card: oklch(0.208 0.042 265.755);
+  --card-foreground: oklch(0.984 0.003 247.858);
+  --popover: oklch(0.208 0.042 265.755);
+  --popover-foreground: oklch(0.984 0.003 247.858);
+  --primary: oklch(0.929 0.013 255.508);
+  --primary-foreground: oklch(0.208 0.042 265.755);
+  --secondary: oklch(0.279 0.041 260.031);
+  --secondary-foreground: oklch(0.984 0.003 247.858);
+  --muted: oklch(0.279 0.041 260.031);
+  --muted-foreground: oklch(0.704 0.04 256.788);
+  --accent: oklch(0.279 0.041 260.031);
+  --accent-foreground: oklch(0.984 0.003 247.858);
+  --destructive: oklch(0.704 0.191 22.216);
+  --destructive-foreground: oklch(0.984 0.003 247.858);
+  --border: oklch(1 0 0 / 10%);
+  --input: oklch(1 0 0 / 15%);
+  --ring: oklch(0.551 0.027 264.364);
+  --chart-1: oklch(0.488 0.243 264.376);
+  --chart-2: oklch(0.696 0.17 162.48);
+  --chart-3: oklch(0.769 0.188 70.08);
+  --chart-4: oklch(0.627 0.265 303.9);
+  --chart-5: oklch(0.645 0.246 16.439);
+  --sidebar: oklch(0.208 0.042 265.755);
+  --sidebar-foreground: oklch(0.984 0.003 247.858);
+  --sidebar-primary: oklch(0.488 0.243 264.376);
+  --sidebar-primary-foreground: oklch(0.984 0.003 247.858);
+  --sidebar-accent: oklch(0.279 0.041 260.031);
+  --sidebar-accent-foreground: oklch(0.984 0.003 247.858);
+  --sidebar-border: oklch(1 0 0 / 10%);
+  --sidebar-ring: oklch(0.551 0.027 264.364);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-border);
+  }
+
+  body {
+    background-color: var(--color-background);
+    background-image: var(--page-bg);
+    background-attachment: fixed;
+    color: var(--color-foreground);
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  h1,
+  h2,
+  h3 {
+    font-family: var(--font-display);
+  }
+}
+
+@utility glass {
+  background-color: color-mix(in oklab, var(--color-card) 62%, transparent);
+  border: 1px solid color-mix(in oklab, white 70%, transparent);
+  box-shadow: 0 10px 40px color-mix(in oklab, var(--brand) 10%, transparent);
+  backdrop-filter: blur(10px);
+}
+
+@utility gradient-brand {
+  background-image: var(--gradient-brand);
+}
+
+@utility gradient-hot {
+  background-image: var(--gradient-hot);
+}
+
+@utility gradient-warm {
+  background-image: var(--gradient-warm);
+}
+
+/* ===== جداول قابلة للتمرير على الشاشات الصغيرة ===== */
+.table-scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+@media (max-width: 767px) {
+  .table-scroll > table,
+  .overflow-x-auto > table {
+    min-width: 640px;
+  }
+
+  .table-scroll > table th,
+  .table-scroll > table td,
+  .overflow-x-auto > table th,
+  .overflow-x-auto > table td {
+    padding-inline-end: 0.5rem;
+    white-space: nowrap;
+  }
+}
+
+
+/* ===== طباعة التقارير ===== */
+@media print {
+  @page {
+    size: A4;
+    margin: 14mm;
+  }
+
+  html,
+  body {
+    background: #fff !important;
+  }
+
+  .no-print,
+  aside,
+  nav,
+  button {
+    display: none !important;
+  }
+
+  .print-area {
+    display: block !important;
+  }
+
+  .print-sheet {
+    box-shadow: none !important;
+    border: none !important;
+    background: #fff !important;
+    backdrop-filter: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+  }
+
+  .table-scroll,
+  .overflow-x-auto {
+    overflow: visible !important;
+  }
+
+  .print-sheet table {
+    width: 100% !important;
+    min-width: 0 !important;
+    border-collapse: collapse;
+    font-size: 11pt;
+  }
+
+  .print-sheet table th,
+  .print-sheet table td {
+    border: 1px solid #999;
+    padding: 5px 7px;
+  }
+
+  .print-break {
+    break-after: page;
+  }
+
+  .print-sheet tr,
+  .print-sheet section {
+    break-inside: avoid;
+  }
+}
