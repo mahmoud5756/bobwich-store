@@ -16,7 +16,10 @@ export const Route = createFileRoute("/")({
         content:
           "سجّل الدخول لإدارة الجرد الصباحي والمسائي وطلبات الفروع ومتابعة التجهيز والاستلام.",
       },
-      { property: "og:title", content: "تسجيل الدخول · مخازن بوب ويتش" },
+      {
+        property: "og:title",
+        content: "تسجيل الدخول · مخازن بوب ويتش",
+      },
       {
         property: "og:description",
         content:
@@ -30,6 +33,7 @@ export const Route = createFileRoute("/")({
 function SignInPage() {
   const navigate = useNavigate();
   const { session, loading } = useAuth();
+
   const [mode, setMode] = useState<"signin" | "signup">("signin");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -38,7 +42,10 @@ function SignInPage() {
 
   useEffect(() => {
     if (!loading && session) {
-      void navigate({ to: "/dashboard", replace: true });
+      void navigate({
+        to: "/dashboard",
+        replace: true,
+      });
     }
   }, [loading, session, navigate]);
 
@@ -56,11 +63,14 @@ function SignInPage() {
         if (error) throw error;
 
         toast.success("تم تسجيل الدخول");
+
+        void navigate({
+          to: "/dashboard",
+          replace: true,
+        });
       } else {
-        const redirectTo =
-          window.location.hostname === "localhost"
-            ? window.location.origin
-            : "https://store.bobwich.workers.dev";
+        // رابط الموقع المنشور فقط - بدون localhost نهائيًا
+        const redirectTo = "https://store.bobwich.workers.dev";
 
         const { error } = await supabase.auth.signUp({
           email,
@@ -76,9 +86,12 @@ function SignInPage() {
         if (error) throw error;
 
         toast.success("تم إنشاء الحساب");
-      }
 
-      void navigate({ to: "/dashboard", replace: true });
+        void navigate({
+          to: "/dashboard",
+          replace: true,
+        });
+      }
     } catch (err) {
       toast.error(
         err instanceof Error ? err.message : "تعذّر إتمام العملية"
@@ -89,10 +102,8 @@ function SignInPage() {
   }
 
   async function handleGoogle() {
-    const redirectTo =
-      window.location.hostname === "localhost"
-        ? window.location.origin
-        : "https://store.bobwich.workers.dev";
+    // الموقع المنشور فقط - لا يوجد localhost
+    const redirectTo = "https://store.bobwich.workers.dev";
 
     const { error } = await supabase.auth.signInWithOAuth({
       provider: "google",
@@ -105,8 +116,8 @@ function SignInPage() {
       toast.error("تعذّر تسجيل الدخول عبر جوجل");
     }
 
-    // عند النجاح Supabase بيحوّل المستخدم لصفحة جوجل مباشرة (redirect)،
-    // فمفيش داعي لأي navigate هنا.
+    // لا نعمل navigate هنا.
+    // Supabase يتولى تحويل المستخدم إلى Google ثم يرجعه للرابط المحدد.
   }
 
   return (
@@ -125,6 +136,7 @@ function SignInPage() {
             <h1 className="font-display text-2xl font-extrabold text-foreground">
               مخازن بوب ويتش
             </h1>
+
             <p className="text-xs text-muted-foreground">
               نظام إدارة المخزن وطلبات الفروع
             </p>
@@ -161,6 +173,7 @@ function SignInPage() {
           {mode === "signup" && (
             <div className="space-y-1.5">
               <Label htmlFor="name">الاسم الكامل</Label>
+
               <Input
                 id="name"
                 value={fullName}
@@ -172,6 +185,7 @@ function SignInPage() {
 
           <div className="space-y-1.5">
             <Label htmlFor="email">البريد الإلكتروني</Label>
+
             <Input
               id="email"
               type="email"
@@ -184,6 +198,7 @@ function SignInPage() {
 
           <div className="space-y-1.5">
             <Label htmlFor="password">كلمة المرور</Label>
+
             <Input
               id="password"
               type="password"
@@ -217,7 +232,9 @@ function SignInPage() {
           المتابعة باستخدام جوجل
         </Button>
 
-        <p className="mt-5 text-center text-[11px] leading-relaxed text-muted-foreground"></p>
+        <p className="mt-5 text-center text-[11px] leading-relaxed text-muted-foreground">
+          تسجيل الدخول آمن ومحمي بواسطة Google و Supabase
+        </p>
       </div>
     </div>
   );
