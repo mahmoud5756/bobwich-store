@@ -60,7 +60,7 @@ function SignInPage() {
         const redirectTo =
           window.location.hostname === "localhost"
             ? window.location.origin
-            : "https://bobwich-store.workers.dev";
+            : "https://store.bobwich.workers.dev";
 
         const { error } = await supabase.auth.signUp({
           email,
@@ -92,7 +92,7 @@ function SignInPage() {
     const redirectTo =
       window.location.hostname === "localhost"
         ? window.location.origin
-        : "https://bobwich-store.workers.dev";
+        : "https://store.bobwich.workers.dev";
 
     const { error } = await supabase.auth.signInWithOAuth({
       provider: "google",
