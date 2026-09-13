@@ -3,7 +3,7 @@
 
 // TODO: بعد ما يبقى عندك دومين حقيقي (بعد النشر)، غيّر القيمة دي بيه بالظبط
 // من غير / في الآخر، مثال: "https://orders.bobwich.com"
-export const SITE_URL = "https://bobwich-store.pages.dev";
+export const SITE_URL = "https://store.bobwich.workers.dev";
 
 export const SITE_NAME = "مخازن بوب ويتش";
 
